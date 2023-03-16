@@ -17,8 +17,15 @@ client.addListener((key, val, type, id) => {
 
 //create a server object:
 http.createServer(function (req, res) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+
+
+    res.write('<!DOCTYPE html><html><head><title>Web Dash</title><meta http-equiv="refresh" content="1"></head>');
+    res.write('<body><ul>');
     Object.keys(data).forEach(key=>{
-        res.write(key + ":" + data[key] + "\n");
-    })
+        res.write("<li>" + key + ":" + data[key] + "</li>");
+    });
+    res.write("</ul></body>");
+
     res.end(); //end the response
 }).listen(8080); //the server object listens on port 8080
